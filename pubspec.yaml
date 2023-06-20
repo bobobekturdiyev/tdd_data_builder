@@ -1,6 +1,6 @@
 name: tdd_data_builder
 description: DTO and Service builder for TDD Clean Architecture. This package usually generates dto and service files easily. It accelerates your coding process.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/bobobekturdiyev/tdd_data_builder
 
 environment:
