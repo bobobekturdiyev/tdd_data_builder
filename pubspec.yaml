@@ -1,0 +1,19 @@
+name: tdd_data_builder
+description: DTO and Service builder for TDD Clean Architecture
+version: 0.0.1
+repository: https://github.com/bobobekturdiyev/tdd_data_builder
+
+environment:
+  sdk: ^3.0.5
+
+# Add regular dependencies here.
+dependencies:
+  dio: ^5.2.1+1
+  retrofit: ^4.0.1
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
+  retrofit_generator: ^7.0.1
+  build_runner: '>2.3.0 <4.0.0'
+  json_serializable: '>4.4.0'
