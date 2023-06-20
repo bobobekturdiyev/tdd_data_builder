@@ -2,7 +2,7 @@ import 'dart:io';
 
 void main(List<String> arguments) {
   final type = arguments.isNotEmpty ? arguments[0] : '';
-  final name = arguments.length >= 2 ? arguments[1] : '';
+  final name = capitalizeFirstLetter(arguments.length >= 2 ? arguments[1] : '');
   final arg3 = arguments.length >= 3 ? arguments[2] : '';
   final folderName = name.toLowerCase();
 
@@ -145,4 +145,12 @@ class _Converter<T> implements JsonConverter<T, Object?> {
 }
 
   ''';
+}
+
+String capitalizeFirstLetter(String input) {
+  if (input.isEmpty) {
+    return input;
+  }
+
+  return input[0].toUpperCase() + input.substring(1);
 }
