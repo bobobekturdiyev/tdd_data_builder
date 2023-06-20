@@ -14,18 +14,18 @@ This package uses retrofit and dio for api usage.
 
 ### Create DTO file
 ```
-flutter pub run data_builder dto <DTO-NAME>
+dart run tdd_data_builder dto <DTO-NAME>
 ```
 Replace <DTO-NAME> to the name of your DTO.
 
 You may create entity for your DTO by adding --entity
 ```
-flutter pub run data_builder dto <DTO-NAME> --entity
+dart run tdd_data_builder dto <DTO-NAME> --entity
 ```
 
 ### Create Service file
 ```
-flutter pub run data_builder service <SERVICE-NAME>
+dart run tdd_data_builder service <SERVICE-NAME>
 ```
 Replace <SERVICE-NAME> to the name of your service.
 
@@ -44,7 +44,7 @@ Many back-end services returns response inside data property of their JSON file 
 We created a special DataResponse class to extract the data from the this JSON. It means you don't need to create class which holds data property every time. Run this code:
 
 ```
-flutter pub run data_builder data-response
+dart run tdd_data_builder data-response
 ```
 
 It generates the file in the following path:

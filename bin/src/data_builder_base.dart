@@ -1,52 +1,41 @@
 import 'dart:io';
 
 void main(List<String> arguments) {
-  if (arguments.length < 2) {
-    print(
-        'Please provide the type (dto or service) and the name as arguments.');
-    return;
-  }
-
-  final type = arguments[0];
-  final name = arguments[1];
-  final arg3 = arguments[2];
+  final type = arguments.isNotEmpty ? arguments[0] : '';
+  final name = arguments.length >= 2 ? arguments[1] : '';
+  final arg3 = arguments.length >= 3 ? arguments[2] : '';
   final folderName = name.toLowerCase();
 
   final folder = Directory('lib/data/$folderName');
 
   if (!folder.existsSync()) {
-    folder.createSync();
+    folder.createSync(recursive: true);
   }
 
   switch (type) {
     case 'dto':
       final file = File('lib/data/dto/$folderName/$folderName.dart');
+      file.createSync(recursive: true);
+
       file.writeAsStringSync(getDtoContent(name, folderName));
 
       if (arg3 == '--entity') {
         final entityFile =
             File('lib/domains/entities/$folderName/$folderName.dart');
+        entityFile.createSync(recursive: true);
         entityFile.writeAsStringSync(getEntityContent(name));
       }
       break;
     case 'service':
       final file =
           File('lib/data/services/$folderName/${folderName}_$type.dart');
+      file.createSync(recursive: true);
       file.writeAsStringSync(getServiceContent(name));
-
-      if (arg3 == '--data-response') {
-        final responseFile = File('lib/data/dto/default/default_response.dart');
-
-        if (!responseFile.existsSync()) {
-          responseFile.writeAsStringSync(getDataResponseContent());
-        } else {
-          print('default_response.dart file already exists\n');
-        }
-      }
       break;
 
     case 'data-response':
       final responseFile = File('lib/data/dto/default/default_response.dart');
+      responseFile.createSync(recursive: true);
 
       if (!responseFile.existsSync()) {
         responseFile.writeAsStringSync(getDataResponseContent());
