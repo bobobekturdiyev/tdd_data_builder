@@ -4,13 +4,7 @@ void main(List<String> arguments) {
   final type = arguments.isNotEmpty ? arguments[0] : '';
   final name = capitalizeFirstLetter(arguments.length >= 2 ? arguments[1] : '');
   final arg3 = arguments.length >= 3 ? arguments[2] : '';
-  final folderName = name.toLowerCase();
-
-  final folder = Directory('lib/data/$folderName');
-
-  if (!folder.existsSync()) {
-    folder.createSync(recursive: true);
-  }
+  final folderName = pascalToUnderscore(name);
 
   switch (type) {
     case 'dto':
@@ -98,7 +92,7 @@ abstract class ${serviceName}Service {
   factory ${serviceName}Service(Dio dio, {String baseUrl}) = _${serviceName}Service;
 
   //@GET("WRITE_THE_URL")
-  //Future<HttpResponse<List<AdDto>>> getBannerAds();
+  //Future<HttpResponse<List<SampleDto>>> getData();
 }
 ''';
 }
@@ -152,5 +146,37 @@ String capitalizeFirstLetter(String input) {
     return input;
   }
 
+  input = clearKeywords(input);
+
   return input[0].toUpperCase() + input.substring(1);
+}
+
+String clearKeywords(String input) {
+  input = input.replaceAll('dto', '');
+  input = input.replaceAll('service', '');
+  input = input.replaceAll('Dto', '');
+  input = input.replaceAll('Service', '');
+  return input;
+}
+
+String pascalToUnderscore(String input) {
+  if (input.isEmpty) {
+    return input;
+  }
+
+  input = clearKeywords(input);
+
+  var buffer = StringBuffer();
+  for (var i = 0; i < input.length; i++) {
+    var char = input[i];
+    if (char == char.toUpperCase()) {
+      if (i > 0) {
+        buffer.write('_');
+      }
+      buffer.write(char.toLowerCase());
+    } else {
+      buffer.write(char.toLowerCase());
+    }
+  }
+  return buffer.toString();
 }
